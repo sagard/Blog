@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<project name='ws-async' default='help' basedir='.'>
+
+	<!-- ========================================= -->
+
+	<target name='help'>
+		<echo>
+			RESTful Web Service - blog
+			
+			Requires:
+				1. Apache Wink
+				2. Tomcat (1.6.x)
+		</echo>
+	</target>
+
+	<!-- ========================================= -->
+
+	<target name='init'>
+		<property name='webcontent.dir' value='${basedir}/WebContent' />
+		<property name='build.dir' value='${basedir}/build' />
+		<property name='blog.war' value='${build.dir}/blog.war' />
+
+		<!-- installation specific -->
+		<property name='wink.home' value="C:\Study\Ruchita\MSSE\Spring'11\275\Examples\apache-wink-1.1.2-incubating" />		
+		<property name='junit.jar' value="C:\Study\Ruchita\MSSE\Fall'10\273-Mike Larkin\Project\junit" />		
+		<property name='tomcat.home' value="C:\Program Files\Apache Software Foundation\Tomcat 6.0" />
+
+
+		<path id='clt.classpath'>
+			<pathelement location='${basedir}/classes' />
+			<pathelement location='${junit.jar}' />
+			<pathelement location='${wink.home}/dist/wink-1.1.2-incubating.jar' />
+			<fileset dir='${tomcat.home}/lib'>
+							<include name='**/*.jar' />
+						</fileset>			
+			<fileset dir='${wink.home}/lib'>
+				<include name='**/*.jar' />
+			</fileset>
+		</path>
+
+		<path id='build.classpath'>
+			<pathelement location='${basedir}/classes' />
+			<pathelement location='${junit.jar}' />
+			<fileset dir='${wink.home}/lib'>
+				<include name='**/*.jar' />
+			</fileset>
+			<fileset dir='${wink.home}/dist'>
+				<include name='**/*.jar' />
+			</fileset>
+		</path>
+	</target>
+
+	<!-- ========================================= -->
+
+	<target name='clean' depends='init'>
+		<delete dir='${build.dir}' />
+		<delete dir='${basedir}/classes' />
+		<mkdir dir='${basedir}/classes' />
+	</target>
+
+	<!-- ========================================= -->
+
+	<target name='compile' depends='init'>
+		<javac debug='on' fork='false' destdir='${basedir}/classes' srcdir='${basedir}/src' classpathref='build.classpath'>
+		</javac>
+	</target>
+
+	<!-- ========================================= -->
+
+	<target name='war' depends='compile'>
+		<mkdir dir='${build.dir}' />
+		<war destfile="${blog.war}" webxml="${webcontent.dir}/WEB-INF/web.xml">
+			<webinf dir="${webcontent.dir}/WEB-INF" includes="**/*" />
+			<classes dir="${basedir}/classes" includes="**/*" />
+			<lib dir="${wink.home}/lib" includes="*.jar" />
+			<lib file="${wink.home}/dist/wink-common-1.1.2-incubating.jar" />
+			<lib file="${wink.home}/dist/wink-server-1.1.2-incubating.jar" />
+		</war>
+	</target>
+
+	<!-- ========================================= -->
+
+	<target name='deploy' depends='war'>
+		<copy todir='${tomcat.home}/webapps' file='${blog.war}' />
+	</target>
+
+	<!-- ========================================= -->
+
+	<target name='demo' depends='compile'>
+		<java fork='yes' maxmemory='512m' classname='gash.wink.blog.client.BlogClient'>
+			<classpath refid='clt.classpath' />
+		</java>
+	</target>
+
+</project>
