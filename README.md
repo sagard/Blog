@@ -13,92 +13,95 @@ v. Get Blog
 vi. Get All Blogs
 vii. Get Blog Entries.
 
+======
+**The request and response parameters are as follows:**
 
-The request and response parameters are as follows:
-CreateBlog
+**CreateBlog** 
+
 Example URL :
 http://{Server IP or DNS e.g. localhost}/ikat/blog
 
-- use http POST i.e use @POST
--where ikatblog is the name of the war file.
+use http POST i.e use @POST where ikatblog is the name of the war file.
 
 Request Parameters
 These parameters are used for requests to this API
 
-Attributename	datatype
-subject	       string
-description	   string
-userid	       string
-timestamp	     string
+|Attributename | datatype |
+|subject | string |
+|description |  string |
+|userid	 |  string |
+| timestamp |    string |
 
 Response Parameters 
 general http response
 
+**GetBlog** 
 
-GetBlog 
 Example URL :
 http://{Server IP or DNS e.g. localhost}/ikat/blog/{blogid}
 
 Response
--as json object
+as json object
 
-Attributename	 value
-blogid	       string
-subject	       string
-description	   string
-userid	       string
-timestamp	     string
+Attributename |	 value |
+blogid	   |    string |
+subject	   |    string  |
+description   |	   string |
+userid	   |    string |
+timestamp    |	     string |
 
 
-GetAllBlogs
+**GetAllBlogs**
+
 Example URL :
 http://{Server IP or DNS e.g. localhost}/ikat/blog
 
--use http Get i.e. @GET
+use http Get i.e. @GET
 
 
 Response
 
 list of blogs as json object
 
-Attributename	 value
-bogid	         string
-subject	       string
-description	   string
-userid	       string
-timestamp	     string
+Attributename  | value |
+bogid	   |      string |
+subject	   |    string   |
+description    |	   string |
+userid	   |    string  |
+timestamp     |	     string |
 
 
-DeleteBlog
+**DeleteBlog**
+
 Example URL :
 http://{Server IP or DNS e.g. localhost}/ikat/blog/{blogid}/{userid}
 
-- use http DELETE method i.e. annotation @DELETE
+use http DELETE method i.e. annotation @DELETE
 
 Response
 general http response
 
-CreateBlogEntry
+**CreateBlogEntry**
 
 Example URL :
 http://{Server IP or DNS e.g. localhost}/ikat/blog/{blogid}/blogentry
 
-- use http post i.e. @POST
+use http post i.e. @POST
 
 Request Parameters
 These parameters are used for requests to this API
 
-Attributename	datatype
-content	       string
-userid	       string
-timestamp	     string
+Attributename |	datatype |
+content	   |    string  |
+userid	   |    string  |
+timestamp     |	     string  |
 
 Response Parameters
 general http response
 
 
 
-GetBlogEntries
+**GetBlogEntries**
 Example URL :
 http://{Server IP or DNS e.g.localhost}/ikat/blog/{blogid}/blogentry
 
@@ -107,17 +110,18 @@ Response
 List of Blog Entry objects
 
 Blog Entry 
-Attributename	 datatype
-blogentryid	    string
-content	        string
-userid	        string
-timestamp	      string
+Attributename |	 datatype  |
+blogentryid    |	    string |
+content	  |      string |
+userid	    |    string  |
+timestamp    |	      string |
+ 
 
+**DeleteBlogEntry**
 
-DeleteBlogEntry
 Example URL :
 http://localhost/ikat/blog/{blogid}/blogentries/{blogentryid}/{userid}
---use http DELETE i.e. @Delete
+use http DELETE i.e. @Delete
 
 Response
 general http response
@@ -125,10 +129,10 @@ general http response
 ===============
 
 Software requirement:
-	Java: jdk 1.5 or later
-	MongoDB
-  Apache wink
-  Apache Tomcat
+ - Java: jdk 1.5 or later
+ - MongoDB
+ - Apache wink
+ - Apache Tomcat
 		
 List of jar dependency (Library files):
 
